@@ -5,6 +5,7 @@ import requests
 from packaging import version
 import os
 
+home = os.environ["HOME"]
 owner = "neovim"
 repo = "neovim"
 
@@ -47,17 +48,17 @@ if existNvim() is False or version.parse(
         "notify-send 'Update Neovim' 'Looks like Your neovim either old or does not exist'"
     )
     print(" 󱞩❕Looks like Your neovim either old or does not exist")
-    if os.path.isfile(f"/home/nahian/Downloads/{file}") is True:
+    if os.path.isfile(f"{home}/Downloads/{file}") is True:
         print(f"  󱞩Removing {file} from 'Download' folder")
-        os.remove(f"/home/nahian/Downloads/{file}")
-    if os.path.isdir("/home/nahian/Downloads/nvim-linux64") is True:
+        os.remove(f"{home}/Downloads/{file}")
+    if os.path.isdir(f"{home}/Downloads/nvim-linux64") is True:
         print(f"  󱞩Removing {file[:-7]} folder from 'Download' folder")
-        os.system("rm -rf /home/nahian/Downloads/nvim-linux64")
+        os.system(f"rm -rf {home}/Downloads/nvim-linux64")
     if os.path.isdir("/opt/nvim-linux64") is True:
         print(f"  󱞩Removing {file[:-7]} folder from 'opt' folder")
         os.system("rm -rf /opt/nvim-linux64")
     print("\n⬇️ Downloading latest neovim in 'Download' folder⬇️ ")
-    subprocess.run(["curl", "--output-dir", "/home/nahian/Downloads/", "-#OL", link])
+    subprocess.run(["curl", "--output-dir", f"{home}/Downloads/", "-#OL", link])
     print("\n📂Extracting it to 'opt' folder")
     subprocess.run(
         [
@@ -66,7 +67,7 @@ if existNvim() is False or version.parse(
             "-C",
             "/opt",
             "-xvf",
-            f"/home/nahian/Downloads/{file}",
+            f"{home}/Downloads/{file}",
         ]
     )
     print(
