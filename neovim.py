@@ -5,6 +5,9 @@ import requests
 from packaging import version
 import os
 
+owner = "neovim"
+repo = "neovim"
+
 
 def existNvim():
     try:
@@ -29,15 +32,13 @@ def checkLocalNvim():
 
 
 def checkRemoteNvim():
-    owner = "neovim"
-    repo = "neovim"
     api = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
     response = requests.get(api)
-    return response.json()["name"][5:]
+    return response.json()["tag_name"][1:]
 
 
 file = "nvim-linux64.tar.gz"
-link = f"https://github.com/neovim/neovim/releases/latest/download/{file}"  # noqa:E501
+link = f"https://github.com/{owner}/{repo}/releases/latest/download/{file}"  # noqa:E501
 print("➡️ Let's see current state of neovim 👀")
 if existNvim() is False or version.parse(
     checkLocalNvim()  # type: ignore
