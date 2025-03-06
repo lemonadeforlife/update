@@ -13,7 +13,7 @@ repo = "neovim"
 def existNvim():
     try:
         subprocess.check_call(
-            ["/opt/nvim-linux64/bin/nvim", "-v"],
+            ["/opt/nvim-linux-x86_64/bin/nvim", "-v"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
@@ -23,7 +23,7 @@ def existNvim():
 
 
 def checkLocalNvim():
-    text = subprocess.check_output(["/opt/nvim-linux64/bin/nvim", "-v"])
+    text = subprocess.check_output(["/opt/nvim-linux-x86_64/bin/nvim", "-v"])
     convertText = text.decode("utf-8")
     versionText = convertText.splitlines()
     versionPattern = re.compile(r"NVIM v\d+\.\d+\.\d+")
@@ -38,7 +38,7 @@ def checkRemoteNvim():
     return response.json()["tag_name"][1:]
 
 
-file = "nvim-linux64.tar.gz"
+file = "nvim-linux-x86_64.tar.gz"
 link = f"https://github.com/{owner}/{repo}/releases/latest/download/{file}"  # noqa:E501
 print("➡️ Let's see current state of neovim 👀")
 if existNvim() is False or version.parse(
